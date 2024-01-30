@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-import plotly.express as px
+
 
 
 
@@ -12,12 +12,6 @@ def extracao_bcb(codigo, inicio, fim):
     df.index = pd.to_datetime(df.index, dayfirst=True)
     return df
 
-# Criação dos graficos
-def gerar_grafico(df, nome_serie):
-    
-    fig = px.line(df, x=df.index, y="valor", title=f"{nome_serie}",
-                  labels={"valor": "Valor", "index": "Data"})
-    st.plotly_chart(fig)
 
 # Criação da Imagem/Titulo/Lista/Caixa da Lista/
 def main():
@@ -91,7 +85,7 @@ def main():
                 st.dataframe(df_resultado)
 
                 
-                gerar_grafico(df_resultado, opcao_serie)
+               
             else:
                 st.warning("Não foram encontrados dados para a série temporal informada.")
         else:
