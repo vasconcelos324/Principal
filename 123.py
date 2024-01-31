@@ -11,8 +11,9 @@ def extracao_bcb(codigo, inicio, fim):
 
 # Criação do gráfico com Streamlit
 def gerar_grafico(df, nome_serie):
-    st.line_chart(df["valor"], use_container_width=True)
     st.title(f"{nome_serie}")
+    st.line_chart(df["valor"], use_container_width=True)
+    
 
 # Criação da Imagem/Titulo/Lista/Caixa da Lista/
 def main():
