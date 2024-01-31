@@ -21,8 +21,7 @@ def gerar_grafico(df, nome_serie):
 
 # Criação da Imagem/Titulo/Lista/Caixa da Lista/
 def main():
-    image = "logo-bcb.svg"
-    st.image(image, use_column_width=True)
+
     st.title("Consulta de Série Temporal do Banco Central")
 
     series_temporais = {
@@ -48,14 +47,8 @@ def main():
 
             if not df_resultado.empty:
                 # Layout em duas colunas
-                col1, col2 = st.columns(2)
-
-                # Coluna 1: Exibindo a planilha
-                with col1:
-                    st.dataframe(df_resultado)
-
-                # Coluna 2: Exibindo o gráfico
-                with col2:
+                
+                
                     gerar_grafico(df_resultado, opcao_serie)
             else:
                 st.warning("Não foram encontrados dados para a série temporal informada.")
