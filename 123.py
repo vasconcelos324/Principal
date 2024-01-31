@@ -16,8 +16,8 @@ def gerar_grafico(df, nome_serie):
 
 # Criação da Imagem/Titulo/Lista/Caixa da Lista/
 def main():
-    image = "logo-bcb.svg"
-    st.image(image, use_column_width=True)
+    
+    
     st.title("Consulta de Série Temporal do Banco Central")
 
     series_temporais = {
