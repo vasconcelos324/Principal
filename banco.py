@@ -1,34 +1,18 @@
-import streamlit as st
 import pandas as pd
-import plotly.express as px
+import streamlit as st
 
 
-
-# Criação dos dados
-def extracao_bcb(codigo, inicio, fim):
-    url = 'https://api.bcb.gov.br/dados/serie/bcdata.sgs.{}/dados?formato=json&dataInicial={}&dataFinal={}'.format(codigo, inicio, fim)
+# Função para extrair dados
+def extrair_dados(codigo, data_inicial, data_final):
+    url = f'https://api.bcb.gov.br/dados/serie/bcdata.sgs.{codigo}/dados?formato=json&dataInicial={data_inicial}&dataFinal={data_final}'
     df = pd.read_json(url)
     df.set_index('data', inplace=True)
     df.index = pd.to_datetime(df.index, dayfirst=True)
     return df
 
-# Criação dos graficos
-def gerar_grafico(df, nome_serie):
-    
-    fig = px.line(df, x=df.index, y="valor", title=f"{nome_serie}",
-                  labels={"valor": "Valor", "index": "Data"})
-    st.plotly_chart(fig)
-
-# Criação da Imagem/Titulo/Lista/Caixa da Lista/
+# Função principal
 def main():
-
-    image="logo-bcb.svg"
-    st.image(image,use_column_width=True)
     st.title("Consulta de Série Temporal do Banco Central")
-    
-
-    
-
     series_temporais = {
         "Indice de Vendas do Varejo":1455,
         "Indice de Confiança do Consumidor":4393,
@@ -67,41 +51,36 @@ def main():
         "Consumo de Energia Eletrica - Outros (GWH)":1405,
         "Consumo de Energia Eletrica - Total (GWH)":1406, 
         "Taxa de Desemprego- Brasil ":24369,
-        "Endividamentto Familiar":29037
-
-    }
-
-
+        "Endividamentto Familiar":29037}
     
     opcao_serie = st.selectbox("Escolha uma série temporal:", list(series_temporais.keys()))
-
-   
     codigo_serie = series_temporais[opcao_serie]
+    data_inicial = st.date_input("Digite a data inicial:")
+    data_final = st.date_input("Digite a data final:")
 
-    
-    data_inicial = st.date_input("Selecione a data inicial:")
-    data_final = st.date_input("Selecione a data final:")
+    # Botão para coletar e exibir os dados
+    if st.button("Coletar Dados"):
+        # Extraindo dados
+        df_resultado = extrair_dados(codigo_serie, data_inicial.strftime('%d/%m/%Y'), data_final.strftime('%d/%m/%Y'))
 
-    
-    if st.button("Consultar Série Temporal"):
-        if data_inicial and data_final:
-            df_resultado = extracao_bcb(codigo_serie, data_inicial, data_final)
+        if not df_resultado.empty:
+            # Criando duas colunas
+            col1, col2 = st.columns(2)
 
-            if not df_resultado.empty:
-                
+            # Exibindo os dados na primeira coluna
+            with col1:
+                st.subheader(f"{opcao_serie}")
                 st.dataframe(df_resultado)
 
-                
-                gerar_grafico(df_resultado, opcao_serie)
-            else:
-                st.warning("Não foram encontrados dados para a série temporal informada.")
+            # Exibindo o gráfico na segunda coluna
+            with col2:
+                st.subheader(f"{opcao_serie}")
+                st.line_chart(df_resultado)
         else:
-            st.warning("Preencha todos os campos.")
-
+            st.warning("Não foi possível coletar dados para a série temporal escolhida.")
 
 if __name__ == "__main__":
     main()
-
 
 
 
