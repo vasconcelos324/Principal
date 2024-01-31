@@ -11,18 +11,18 @@ def extracao_bcb(codigo, inicio, fim):
 
 # Criação do gráfico com Streamlit
 def gerar_grafico(df, nome_serie):
-    st.title(f"{nome_serie}")
     st.line_chart(df["valor"], use_container_width=True)
-    
+    st.title(f"{nome_serie}")
 
 # Criação da Imagem/Titulo/Lista/Caixa da Lista/
 def main():
-    
-    
+    image = "logo-bcb.svg"
+    st.image(image, use_column_width=True)
     st.title("Consulta de Série Temporal do Banco Central")
 
     series_temporais = {
-        "Indice de Vendas do Varejo": 1455, "Indice de Confiança do Consumidor":4393,
+        "Indice de Vendas do Varejo": 1455,
+         "Indice de Confiança do Consumidor":4393,
         "Indice de Confiança do Empresario Industrial":7341,
         "Indice do Preço ao consumidor":13522,
         "Indice de Comodite Brasil (IC-BR)":27574,
@@ -58,8 +58,9 @@ def main():
         "Consumo de Energia Eletrica - Outros (GWH)":1405,
         "Consumo de Energia Eletrica - Total (GWH)":1406, 
         "Taxa de Desemprego- Brasil ":24369,
-        "Endividamentto Familiar":29037}
+        "Endividamentto Familiar":29037
         
+    }
 
     opcao_serie = st.selectbox("Escolha uma série temporal:", list(series_temporais.keys()))
 
@@ -73,8 +74,16 @@ def main():
             df_resultado = extracao_bcb(codigo_serie, data_inicial, data_final)
 
             if not df_resultado.empty:
-                st.dataframe(df_resultado)
-                gerar_grafico(df_resultado, opcao_serie)
+                # Layout em duas colunas
+                col1, col2 = st.beta_columns(2)
+
+                # Coluna 1: Exibindo a planilha
+                with col1:
+                    st.dataframe(df_resultado)
+
+                # Coluna 2: Exibindo o gráfico
+                with col2:
+                    gerar_grafico(df_resultado, opcao_serie)
             else:
                 st.warning("Não foram encontrados dados para a série temporal informada.")
         else:
@@ -82,3 +91,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
