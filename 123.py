@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-
+import plotly.express as px
 
 
 
@@ -12,11 +12,18 @@ def extracao_bcb(codigo, inicio, fim):
     df.index = pd.to_datetime(df.index, dayfirst=True)
     return df
 
+# Criação dos graficos
+def gerar_grafico(df, nome_serie):
+    
+   
+    
+    st.line_chart(df,x=df.index,y="valor")
 
 # Criação da Imagem/Titulo/Lista/Caixa da Lista/
 def main():
 
-    
+    image="logo-bcb.svg"
+    st.image(image,use_column_width=True)
     st.title("Consulta de Série Temporal do Banco Central")
     
 
@@ -85,7 +92,7 @@ def main():
                 st.dataframe(df_resultado)
 
                 
-               
+                gerar_grafico(df_resultado, opcao_serie)
             else:
                 st.warning("Não foram encontrados dados para a série temporal informada.")
         else:
