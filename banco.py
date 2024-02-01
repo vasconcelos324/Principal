@@ -11,17 +11,17 @@ def extrair_dados(codigo, data_inicial, data_final):
 def main():
     st.title("Consulta de Série Temporal do Banco Central")
     series_temporais = {
-        "Índice volume de vendas no varejo - Total - Brasil         (Índice)":1455,
+        "Índice volume de vendas no varejo - Brasil                 (Índice)":1455,
         "Índice de Confiança do Consumidor                          (Índice)":4393,
         "Índice de Confiança do Empresário Industrial - Geral       (Índice)":7341,
-        "Índice nacional de preços ao consumidor (INPC)             (Var. % mensal)":188,
-        "Índice geral de preços do mercado (IGP-M)                  (Var. % mensal)":189,
-        "Índice nacional de preços ao consumidor-amplo (IPCA)       (Var. % mensal)":433,
-        "Índice nacional de preços ao consumidor - amplo (IPCA) - em 12 meses (%)":13522,
-        "Índice de Comodite - Brasil                                (Índice)":27574,
-        "Índice de Commodities - Brasil - Agropecuária              (Índice)":27575,
-        "Índice de Comodite Brasil- Metal                           (Índice)":27576,
-        "Índice de Comodite Brasil- Energia                         (Índice)":27577,
+        "Índice nacional de preços ao consumidor - INPC             (Var. % mensal)":188,
+        "Índice geral de preços do mercado -  IGPM                  (Var. % mensal)":189,
+        "Índice nacional de preços ao consumidor amplo - IPCA       (Var. % mensal)":433,
+        "Índice nacional de preços ao consumidor amplo - IPCA       (%)":13522,
+        "Índice de Comodities - Brasil                              (Índice)":27574,
+        "Índice de Comodite Brasil - Agropecuária                   (Índice)":27575,
+        "Índice de Comodite Brasil - Metal                          (Índice)":27576,
+        "Índice de Comodite Brasil - Energia                        (Índice)":27577,
         
         "PIB  Agropecuária Taxa de variação real no ano             (Var. % anual)":7327,
         "PIB  Indústria    Taxa de variação real no ano             (Var. % anual)":7328,
