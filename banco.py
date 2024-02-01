@@ -1,6 +1,8 @@
 import pandas as pd
 import streamlit as st
 
+
+@st.cache_data
 def extrair_dados(codigo, data_inicial, data_final):
     url = f'https://api.bcb.gov.br/dados/serie/bcdata.sgs.{codigo}/dados?formato=json&dataInicial={data_inicial}&dataFinal={data_final}'
     df = pd.read_json(url)
