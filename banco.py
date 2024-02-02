@@ -125,7 +125,7 @@ def main():
             with col2:
                 st.subheader(f"{opcao_serie}")
                 st.line_chart(df_resultado)
-                st.subheader("Fonte : Banco Central do Brasil ")
+                st.markdown("Fonte : Banco Central do Brasil ")
         else:
             st.warning("Não foi possível coletar dados para a série temporal escolhida.")
 if __name__ == "__main__":
