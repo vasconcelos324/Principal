@@ -1,7 +1,7 @@
 import pandas as pd
 import streamlit as st
 
-
+st.set_page_config(layout="wide")
 @st.cache_data
 def extrair_dados(codigo, data_inicial, data_final):
     url = f'https://api.bcb.gov.br/dados/serie/bcdata.sgs.{codigo}/dados?formato=json&dataInicial={data_inicial}&dataFinal={data_final}'
@@ -49,7 +49,7 @@ def main():
         "Taxa de inadimplência das operações de crédito do SFN - Região Sul - Total          (%)":15956,
         "Endividamento das famílias com o SFN em relação à renda acumulada dos últimos doze meses (%)":29037,
 
-        "Vendas de motociclos (Unidades)":1381,
+        "Vendas de motociclos                                       (Unidades)":1381,
         "Vendas de veículos pelas concessionárias - Automóveis      (Unidades)":7384,
         "Vendas de veículos pelas concessionárias - Comerciais leves(Unidades)":7385,
         "Vendas de veículos pelas concessionárias - Caminhões       (Unidades)":7386,
@@ -124,7 +124,7 @@ def main():
                 st.dataframe(df_resultado)
             with col2:
                 st.subheader(f"{opcao_serie}")
-                st.line_chart(df_resultado)
+                st.line_chart(df_resultado, height=300)
                 st.markdown("Fonte : Banco Central do Brasil ")
         else:
             st.warning("Não foi possível coletar dados para a série temporal escolhida.")
