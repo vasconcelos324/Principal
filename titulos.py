@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 
+st.set_page_config(layout="wide")
 
 
 st.title(" Preço do Tesouro Nacional ")
@@ -26,8 +27,6 @@ coluna_selecionada = st.selectbox('Selecione uma coluna', titulos_filtrados.colu
 col1, col2 = st.columns(2)
 col1.dataframe(titulos_filtrados[[coluna_selecionada]])
 col2.subheader(f"{coluna_selecionada}")
-col2.line_chart(titulos_filtrados[coluna_selecionada].reset_index(drop=True))
+col2.line_chart(titulos_filtrados[coluna_selecionada].reset_index(drop=True), height=200)
 col2.markdown("Fonte : Tesouro Direto ")
-
-
 
