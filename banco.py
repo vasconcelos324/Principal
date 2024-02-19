@@ -61,6 +61,7 @@ def main():
 
         "Endividamento das famílias com o SFN em relação à renda acumulada dos últimos doze meses (%)":29037,
 
+        "Índice de Atividade Econômica do Banco Central - IBC-Br    (Índice)":24363,
         "Índice volume de vendas no varejo - Brasil                 (Índice)":1455,
         "Índice de Confiança do Consumidor                          (Índice)":4393,
         "Índice de Confiança do Empresário Industrial - Geral       (Índice)":7341,
